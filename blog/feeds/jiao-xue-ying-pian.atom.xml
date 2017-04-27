@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>WCM6的小組作業網誌</title><link href="./" rel="alternate"></link><link href="./feeds/jiao-xue-ying-pian.atom.xml" rel="self"></link><id>./</id><updated>2016-04-22T12:00:00+08:00</updated><entry><title>Ubuntu 16.04 環境下安裝並設定裝Stunnel 與 Fossil SCM</title><link href="./ubuntu-1604-huan-jing-xia-an-zhuang-bing-she-ding-zhuang-stunnel-yu-fossil-scm.html" rel="alternate"></link><published>2016-04-22T12:00:00+08:00</published><updated>2016-04-22T12:00:00+08:00</updated><author><name>黃胤瑋</name></author><id>tag:,2016-04-22:./ubuntu-1604-huan-jing-xia-an-zhuang-bing-she-ding-zhuang-stunnel-yu-fossil-scm.html</id><summary type="html">&lt;p&gt;說明如何在 Ubuntu 操作系統中, 安裝並設定 Stunnel 與 Fossil SCM server &lt;/p&gt;
+
+
+&lt;p&gt;首先開始終端機並且輸入以下指&lt;/p&gt;
+&lt;p&gt;sudo apt update&lt;/p&gt;
+&lt;p&gt;sudo apt install stunnel4 -y&lt;/p&gt;
+&lt;p&gt;sudo apt install fossil&lt;/p&gt;
+&lt;p&gt;就能完成Stunnel 與 Fossil SCM 安裝
+PS:必須在網路連線下才能完成此安裝&lt;/p&gt;
+&lt;p&gt;環境變數與開機啟動設定:&lt;/p&gt;
+&lt;p&gt;於終端機中輸入指令並且於 vi模式下件修改與建立檔案&lt;/p&gt;
+&lt;p&gt;/etc/environment 設定:&lt;/p&gt;
+&lt;p&gt;輸入 sudo vi /etc/environment &lt;/p&gt;
+&lt;p&gt;新增此行 HTTPS=on&lt;/p&gt;
+&lt;p&gt;/etc/default/stunnel4 檔案設定:&lt;/p&gt;
+&lt;p&gt;輸入 sudo vi /etc/default/stunnel4&lt;/p&gt;
+&lt;p&gt;把 ENABLED=0 改成 1&lt;/p&gt;
+&lt;p&gt;Stunnel 設定並執行 fossil http 指令
+stunnel.conf&lt;/p&gt;
+&lt;p&gt;建立 localhost.key 與 localhost.crt:&lt;/p&gt;
+&lt;p&gt;輸入 sudo vi /etc/environment sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout localhost.key -out localhost.crt&lt;/p&gt;
+&lt;p&gt;/etc/stunnel/stunnel.conf 設定檔案, 可同時支援 IPv4 與 IPv6 協定:&lt;/p&gt;
+&lt;p&gt;輸入sudo vi /etc/stunnel/stunnel.conf&lt;/p&gt;
+&lt;p&gt;並且新增以下設定&lt;/p&gt;
+&lt;p&gt;[https]&lt;/p&gt;
+&lt;p&gt;accept = your_IPv4_ip:443&lt;/p&gt;
+&lt;p&gt;accept = :::443&lt;/p&gt;
+&lt;p&gt;cert = /etc/stunnel/localhost.crt&lt;/p&gt;
+&lt;p&gt;key = /etc/stunnel/localhost.key&lt;/p&gt;
+&lt;p&gt;exec = /usr/bin/fossil&lt;/p&gt;
+&lt;p&gt;execargs = /usr/bin/fossil http /home/user/repository/mde2a1.fossil -- https --nojail&lt;/p&gt;
+&lt;p&gt;完成以上步驟就成功完成 安裝及設定&lt;/p&gt;
+&lt;p&gt;實際操作影片:&lt;/p&gt;
+&lt;iframe src="https://player.vimeo.com/video/214832102" width="640" height="372" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href="https://vimeo.com/214832102"&gt;Stunnel 與 Fossil SCM server  安裝與設定&lt;/a&gt; from &lt;a href="https://vimeo.com/user58912621"&gt;黃胤瑋&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;/section&gt;</summary><category term="網路設定"></category></entry><entry><title>v i 指令說明</title><link href="./v-i-zhi-ling-shuo-ming.html" rel="alternate"></link><published>2016-04-21T15:00:00+08:00</published><updated>2016-04-21T15:00:00+08:00</updated><author><name>黃胤瑋</name></author><id>tag:,2016-04-21:./v-i-zhi-ling-shuo-ming.html</id><summary type="html">&lt;p&gt;vi 提供兩種操作模式：輸入模式(insert mode)和指令模式(command mode)
+。當使用者進入 vi 後，即處在指令模式下，此刻鍵入之任何字元皆被視為
+指令。在此模式下可進行刪除、修改等動作。若要輸入資料，則需進入輸入
+模式。
+&lt;/p&gt;
+&lt;p&gt;a                由游標之後加入資料。
+A               由該行之末加入資料。
+i                由游標之前加入資料。
+I                由該行之首加入資料
+ o              新增一行於該行之下供輸入資料之用。
+O              新增一行於該行之上供輸入資料之用。
+ h              向左移一個字元。
+ j               向上移一個字元。
+ k               向下移一個字元。
+ l               向右移一個字元。
+0               移至該行之首
+$               移至該行之末。
+^               移至該行的第一個字元處。
+H              移至視窗的第一列。
+M              移至視窗的中間那列。
+L               移至視窗的最後一列。
+G               移至該檔案的最後一列。
+x                刪除游標所在該字元。X       刪除游標所在之前一字元。
+dd              刪除游標所在該行。
+ r               用接於此指令之後的字元取代(replace)游標所在字元。
+ R              進入取代狀態，直到《ESC》為止。
+ s               刪除游標所在之字元
+S               刪除游標所在之該行資料&lt;/p&gt;
+&lt;p&gt;:wq            完成編輯並儲存&lt;/p&gt;</summary><category term="網路設定"></category></entry><entry><title>VirtualBox安裝並且安裝Ubuntu於VirtualBox</title><link href="./virtualboxan-zhuang-bing-qie-an-zhuang-ubuntuyu-virtualbox.html" rel="alternate"></link><published>2016-04-21T12:00:00+08:00</published><updated>2016-04-21T12:00:00+08:00</updated><author><name>黃胤瑋</name></author><id>tag:,2016-04-21:./virtualboxan-zhuang-bing-qie-an-zhuang-ubuntuyu-virtualbox.html</id><summary type="html">&lt;p&gt;VirtualBox安裝並且安裝Ubuntu於VirtualBox
+ &lt;iframe src="https://player.vimeo.com/video/214116206" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+&lt;p&gt;&lt;a href="https://vimeo.com/214116206"&gt;VirtualBox安裝並且安裝Ubuntu於VirtualBox&lt;/a&gt; from &lt;a href="https://vimeo.com/user58912621"&gt;黃胤瑋&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+&lt;/section&gt;&lt;/p&gt;</summary><category term="網路設定"></category></entry><entry><title>如何設定ipv6網路</title><link href="./ru-he-she-ding-ipv6wang-lu.html" rel="alternate"></link><published>2016-04-07T12:00:00+08:00</published><updated>2016-04-07T12:00:00+08:00</updated><author><name>黃胤瑋</name></author><id>tag:,2016-04-07:./ru-he-she-ding-ipv6wang-lu.html</id><summary type="html">&lt;p&gt;連線到IPV6 的網路設定教學
+&lt;/p&gt;
+&lt;p&gt;連線到IPV6 的網路設定教學&lt;/p&gt;
+&lt;p&gt;首先進入網路和共用中心&lt;/p&gt;
+&lt;p&gt;選擇乙太網路內容&lt;/p&gt;
+&lt;p&gt;把IPV4打勾按掉 選擇IPV6 然後打勾IPV6 點選內容&lt;/p&gt;
+&lt;p&gt;把使用下列DNS伺服器網址打勾&lt;/p&gt;
+&lt;p&gt;慣用DNS伺服器:輸入學校的IPV6 IP&lt;/p&gt;
+&lt;p&gt;其他DNS伺服器:中華電信的IPV6 IP&lt;/p&gt;
+&lt;p&gt;設定完後 進入網際網路的設定&lt;/p&gt;
+&lt;p&gt;點開 Proxy 設定&lt;/p&gt;
+&lt;p&gt;點選LAN設定&lt;/p&gt;
+&lt;p&gt;把Proxy伺服器打勾網址用系館的IPV6 連接阜打3128&lt;/p&gt;
+&lt;p&gt;就能完成IPV6的連線&lt;/p&gt;</summary><category term="網路設定"></category></entry><entry><title>網路線製作</title><link href="./wang-lu-xian-zhi-zuo.html" rel="alternate"></link><published>2016-04-07T12:00:00+08:00</published><updated>2016-04-07T12:00:00+08:00</updated><author><name>黃胤瑋</name></author><id>tag:,2016-04-07:./wang-lu-xian-zhi-zuo.html</id><summary type="html">&lt;p&gt;首先準備好材料: 8蕊網路線
+                              RJ-45接頭
+                               剪刀
+                               壓線鉗&lt;/p&gt;
+&lt;p&gt;接下來就開始製作八
+把網路線的外層塑膠殼剪開 裡面會有8條有顏色的線 將他們整理好並且剪到一樣長&lt;/p&gt;
+&lt;p&gt;網路線有2種接法&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;一般傳輸用網路線色對規則 (兩端的網路頭皆為以下接法)
+白橙、橙、白綠、藍、白藍、綠、白棕、棕&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;兩台電腦資料對傳用色對規則 (又稱跳接法、一頭以正常傳輸色對接法、另一頭則為以下接法)
+白綠、綠、白橙、藍、白藍、橙、白棕、棕&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;完成以上步驟後就能完成網路線製作&lt;/p&gt;
+
+
+&lt;p&gt;&lt;h2&gt;網路線製作影片&lt;/h2&gt;
+&lt;iframe src="https://player.vimeo.com/video/214638661" width="640" height="1138" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+&lt;p&gt;&lt;a href="https://vimeo.com/214638661"&gt;網路線製作教學&lt;/a&gt; from &lt;a href="https://vimeo.com/user58912621"&gt;黃胤瑋&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+&lt;/section&gt;&lt;/p&gt;</summary><category term="網路設定"></category></entry></feed>
