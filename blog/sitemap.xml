@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>./</loc>
-<lastmod>2017-04-26T20:29:26-00:00</lastmod>
+<lastmod>2017-06-24T22:01:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>./archives.html</loc>
-<lastmod>2017-04-26T20:29:26-00:00</lastmod>
+<lastmod>2017-06-24T22:01:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>./tags.html</loc>
-<lastmod>2017-04-26T20:29:26-00:00</lastmod>
+<lastmod>2017-06-24T22:01:37-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>./categories.html</loc>
-<lastmod>2017-04-26T20:29:26-00:00</lastmod>
+<lastmod>2017-06-24T22:01:37-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>./zu-zhuang-dian-nao.html</loc>
+<lastmod>2016-04-23T12:00:00+08:00</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -68,7 +75,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>./category/jiao-xue-ying-pian.html</loc>
-<lastmod>2016-04-22T12:00:00+08:06</lastmod>
+<lastmod>2016-04-23T12:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>./tag/dian-nao-zu-zhuang.html</loc>
+<lastmod>2016-04-23T12:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -82,7 +96,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>./author/huang-yin-wei.html</loc>
-<lastmod>2016-04-22T12:00:00+08:06</lastmod>
+<lastmod>2016-04-23T12:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
